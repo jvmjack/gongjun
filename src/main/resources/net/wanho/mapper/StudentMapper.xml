@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--命名空间 mapper-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.wanho.mapper.StudentMapper">
+
+
+    <insert id="insertStudent" parameterType="Student">
+        <selectKey keyProperty="id" order="BEFORE" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        insert into student(name,age,sex,address) values(#{name},#{age},#{sex},#{address})
+    </insert>
+    <update id="updateStudent" parameterType="integer">
+      update student set name=#{name},age=#{age},sex=#{sex},address=#{address} where id=#{id}
+    </update>
+    <delete id="deleteStudent" parameterType="integer">
+        delete from student where id=#{id}
+    </delete>
+
+    <select id="getStu" resultType="Student">
+        select * from student
+    </select>
+
+    <select id="getStuById" resultType="net.wanho.pojo.Student">
+          select * from student where id=#{id}
+    </select>
+
+
+</mapper>
